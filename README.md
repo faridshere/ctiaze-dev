@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ctiaze-dev — developer portal + read-only MCP server
 
-## Getting Started
+Status (19 Sep 2026): **deployed at https://www.ctiaze.dev but not functional** —
+the Vercel project has no `MONGO_URI_READONLY`, so every MCP tool call returns an
+error. The code also predates the skopnix rebrand (Azerbaijani copy, ctiaze.tech
+links, sorting on `published_at` instead of `effective_at`). The plan of record
+(`ctiaze-web/docs/SKOPNIX-PLAN-2026-09-16.md`, story 4) is to serve the MCP
+server from the main site instead, so treat this repo as a candidate for
+retirement rather than a place to build.
 
-First, run the development server:
+## What it is
+
+- `app/api/[transport]/route.ts` — Streamable-HTTP MCP server (`mcp-handler`)
+  with four read-only tools over the `items` collection of the `ctiaze` Atlas
+  database: `get_recent_threats`, `get_recent_kev`, `search_threats`, `lookup_cve`.
+- `app/page.tsx` — a one-page landing describing the tools and feeds.
+- `lib/db.ts` — Mongo client (deferred to first call so the site builds without
+  the env var); `lib/data.ts` — the queries; `lib/types.ts` — the `FeedItem`
+  contract, a copy of what `ctiaze-web/lib/types.ts` looked like in July 2026.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use            # Node 22 (.nvmrc)
+npm ci
+cp .env.example .env.local   # then paste a read-only Atlas URI
+npm run dev        # http://localhost:3000, MCP at /api/mcp
+node scripts/test-mcp.mjs    # handshake + one tool call against a running server
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel, git-integrated on `main`. The custom domain is `ctiaze.dev` (apex 308s
+to `www`). Set `MONGO_URI_READONLY` in the project settings and redeploy.
