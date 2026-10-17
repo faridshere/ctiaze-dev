@@ -6,6 +6,7 @@ import {
   searchThreats,
   lookupCve,
 } from "@/lib/data";
+import { registerIntelTools } from "@/lib/intel-tools";
 import type { FeedItem } from "@/lib/types";
 
 // A read-only MCP server over ctiaze's Azerbaijani CTI archive. AI agents / SOC
@@ -63,6 +64,8 @@ const handler = createMcpHandler(
           `${cve_id} not found in ctiaze's archive (or invalid CVE id format).`,
         ),
     );
+
+    registerIntelTools(server);
   },
   {},
   { basePath: "/api", maxDuration: 30, verboseLogs: false },
