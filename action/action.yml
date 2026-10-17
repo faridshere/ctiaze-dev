@@ -1,0 +1,44 @@
+name: skopnix stack check
+description: Check an SBOM against skopnix.com threat intelligence (CVEs, CISA KEV, EPSS, cited threat actors) and fail the job on what you choose.
+author: skopnix
+branding:
+  icon: shield
+  color: red
+
+inputs:
+  sbom:
+    description: Path to a CycloneDX JSON, SPDX 2.x JSON or plain-text component list.
+    required: true
+  fail-on:
+    description: >-
+      Comma-separated rules; the step fails if any CVE matches any rule.
+      kev (in CISA KEV), actor (skopnix cites a threat actor), any (any CVE),
+      epss>=0.5 / epss>0.9 (EPSS threshold). Empty = report only, never fail on findings.
+    required: false
+    default: ""
+  api-base:
+    description: API root. Defaults to https://skopnix.com/api/v1.
+    required: false
+    default: ""
+  summary:
+    description: Write a markdown table to the job summary ("true"/"false").
+    required: false
+    default: "true"
+
+outputs:
+  components:
+    description: Number of components sent for checking.
+  findings:
+    description: Number of (component, CVE) findings.
+  kev:
+    description: Findings whose CVE is in CISA KEV.
+  with-actors:
+    description: Findings with at least one cited threat actor.
+  failed:
+    description: '"true" if a fail-on rule matched or the check errored.'
+  report:
+    description: Path to the full JSON report (same shape as `skopnix check --json`).
+
+runs:
+  using: node24
+  main: dist/action.js

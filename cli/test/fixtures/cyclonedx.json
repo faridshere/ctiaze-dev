@@ -1,0 +1,36 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "tools": { "components": [{ "type": "application", "author": "anchore", "name": "syft", "version": "1.14.0" }] },
+    "component": { "bom-ref": "root", "type": "file", "name": "/github/workspace" }
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "group": "org.apache.logging.log4j",
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "cpe": "cpe:2.3:a:apache:log4j:2.14.1:*:*:*:*:*:*:*",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+    },
+    {
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.20",
+      "purl": "pkg:npm/lodash@4.17.20",
+      "components": [
+        { "type": "library", "name": "lodash.merge", "version": "4.6.1", "purl": "pkg:npm/lodash.merge@4.6.1" }
+      ]
+    },
+    { "type": "library", "name": "lodash", "version": "4.17.20", "purl": "pkg:npm/lodash@4.17.20" },
+    { "type": "library", "name": "openssl", "version": "3.0.1", "cpe": "cpe:2.3:a:openssl:openssl:3.0.1:*:*:*:*:*:*:*" },
+    { "type": "library", "purl": "pkg:golang/golang.org/x/net" },
+    { "type": "library", "name": "no-version-no-ids" },
+    { "type": "file", "name": "/usr/lib/libssl.so.3", "version": "3.0.1" }
+  ]
+}

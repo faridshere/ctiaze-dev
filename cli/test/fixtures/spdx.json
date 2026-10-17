@@ -1,0 +1,49 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "my-app",
+  "documentNamespace": "https://anchore.com/syft/dir/my-app-5b7a0c0e",
+  "creationInfo": { "created": "2026-10-01T00:00:00Z", "creators": ["Tool: syft-1.14.0"] },
+  "packages": [
+    {
+      "name": "my-app",
+      "SPDXID": "SPDXRef-DocumentRoot-Directory-my-app",
+      "versionInfo": "NOASSERTION",
+      "downloadLocation": "NOASSERTION"
+    },
+    {
+      "name": "requests",
+      "SPDXID": "SPDXRef-Package-python-requests",
+      "versionInfo": "2.25.0",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        { "referenceCategory": "SECURITY", "referenceType": "cpe23Type", "referenceLocator": "cpe:2.3:a:python:requests:2.25.0:*:*:*:*:*:*:*" },
+        { "referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:pypi/requests@2.25.0" }
+      ]
+    },
+    {
+      "name": "urllib3",
+      "SPDXID": "SPDXRef-Package-python-urllib3",
+      "versionInfo": "1.26.4",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        { "referenceCategory": "PACKAGE_MANAGER", "referenceType": "purl", "referenceLocator": "pkg:pypi/urllib3@1.26.4" }
+      ]
+    },
+    {
+      "name": "openssl",
+      "SPDXID": "SPDXRef-Package-deb-openssl",
+      "versionInfo": "3.0.11-1~deb12u2",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        { "referenceCategory": "SECURITY", "referenceType": "cpe22Type", "referenceLocator": "cpe:/a:openssl:openssl:3.0.11" }
+      ]
+    },
+    { "name": "mystery", "SPDXID": "SPDXRef-Package-mystery", "versionInfo": "NOASSERTION", "downloadLocation": "NOASSERTION" }
+  ],
+  "relationships": [
+    { "spdxElementId": "SPDXRef-DOCUMENT", "relationshipType": "DESCRIBES", "relatedSpdxElement": "SPDXRef-DocumentRoot-Directory-my-app" },
+    { "spdxElementId": "SPDXRef-DocumentRoot-Directory-my-app", "relationshipType": "CONTAINS", "relatedSpdxElement": "SPDXRef-Package-python-requests" }
+  ]
+}

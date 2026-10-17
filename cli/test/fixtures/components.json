@@ -1,0 +1,1 @@
+{ "components": [ { "name": "log4j-core", "version": "2.14.1" }, { "name": "spring-core", "version": "5.3.17", "purl": "pkg:maven/org.springframework/spring-core@5.3.17" } ] }

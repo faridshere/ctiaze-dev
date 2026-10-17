@@ -59,8 +59,22 @@ Examples (MCP `tools/call` arguments → abridged result):
     "count": 1, "cves": [
     { "cve": "CVE-2023-23397", "kev": true, "epss": 0.93, "evidence": "Used against EU targets",
       "url": "https://example.com/apt28", "source": "vendor", "date": "2023-03-15T00:00:00.000Z" } ] }
-```
+```## Distribution tools
 
+These are standalone packages with their own tooling. The Next.js app ignores
+them, and they do not depend on it or on Mongo.
+
+- [`cli/`](cli/README.md): the `skopnix` command-line tool (npm package
+  `skopnix`, Node 20+, no runtime deps). `skopnix check <sbom>` checks a
+  CycloneDX/SPDX/plain-list SBOM via `POST /api/v1/stack` and gates CI with
+  `--fail-on kev|actor|epss>=0.5`. `skopnix claims` and `skopnix actor` read
+  the live API.
+- [`action/`](action/README.md): the `skopnix/stack-check` GitHub Action,
+  which runs the CLI on an SBOM, writes a job-summary table and fails per
+  `fail-on`. Its README has an example with `anchore/sbom-action`.
+
+`POST /api/v1/stack` is being built on the main site and may not be live yet.
+Until then, `check` and the action stop with a clear error.
 ## Run locally
 
 ```bash

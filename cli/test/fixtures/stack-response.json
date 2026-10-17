@@ -1,0 +1,25 @@
+{
+  "components": [
+    {
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "cves": [
+        {
+          "cve": "CVE-2021-44228",
+          "kev": true,
+          "epss": 0.97565,
+          "actors": [
+            { "actor": "APT41", "quote": "APT41 exploited Log4Shell within hours of disclosure.", "url": "https://skopnix.com/actors/apt41" },
+            { "actor": "Lazarus Group", "quote": "Lazarus | used Log4j against VMware Horizon.", "url": "https://skopnix.com/actors/lazarus-group" }
+          ]
+        },
+        { "cve": "CVE-2021-45046", "kev": false, "epss": 0.9, "actors": [] }
+      ]
+    },
+    { "name": "lodash", "version": "4.17.20", "cves": [ { "cve": "CVE-2021-23337", "kev": false, "epss": 0.012, "actors": [] } ] },
+    { "name": "lodash.merge", "version": "4.6.1", "cves": [] },
+    { "name": "openssl", "version": "3.0.1", "cves": [ { "cve": "CVE-2022-3602", "kev": false, "epss": null, "actors": [ { "actor": "Unnamed cluster" } ] } ] },
+    { "name": "net", "version": "", "cves": [] }
+  ]
+}

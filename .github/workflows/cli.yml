@@ -1,0 +1,65 @@
+name: cli + action
+
+on:
+  push:
+    branches: [main]
+    paths: ["cli/**", "action/**", ".github/workflows/cli.yml"]
+  pull_request:
+    paths: ["cli/**", "action/**", ".github/workflows/cli.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: action/dist is committed and current
+        run: git diff --exit-code -- ../action/dist
+
+  action:
+    # Runs the Action itself against a local mock of /stack (no network to skopnix.com).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: start mock /stack
+        run: |
+          nohup node cli/scripts/mock-stack-server.mjs 4555 > "$RUNNER_TEMP/mock.log" 2>&1 &
+          for i in $(seq 1 20); do curl -s -o /dev/null http://127.0.0.1:4555/ && exit 0; sleep 0.5; done
+          cat "$RUNNER_TEMP/mock.log"; exit 1
+      - name: report only
+        id: report
+        uses: ./action
+        with:
+          sbom: cli/test/fixtures/cyclonedx.json
+          api-base: http://127.0.0.1:4555/api/v1
+      - name: gate on KEV (expected to fail)
+        id: gate
+        continue-on-error: true
+        uses: ./action
+        with:
+          sbom: cli/test/fixtures/cyclonedx.json
+          api-base: http://127.0.0.1:4555/api/v1
+          fail-on: kev
+          summary: "false"
+      - name: assert outcomes
+        run: |
+          test "${{ steps.report.outcome }}" = success
+          test "${{ steps.report.outputs.findings }}" = 4
+          test "${{ steps.report.outputs.kev }}" = 1
+          test "${{ steps.gate.outcome }}" = failure
+          test "${{ steps.gate.outputs.failed }}" = true
