@@ -1,0 +1,8 @@
+# Plain inventory: vendor product version, product version, purl or CPE.
+apache http server 2.4.49
+fortinet fortios 7.2.0      # edge firewall
+nginx 1.25.3
+pkg:npm/%40babel/core@7.22.0
+cpe:2.3:a:ivanti:connect_secure:22.7:r2.3:*:*:*:*:*:*
+
+nginx 1.25.3
