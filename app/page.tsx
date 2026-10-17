@@ -3,6 +3,9 @@ const TOOLS = [
   ["get_recent_kev", "Ən son aktiv istismar edilən (CISA KEV) zəifliklər"],
   ["search_threats", "Arxivdə açar sözlə axtarış (başlıq / kateqoriya / CVE)"],
   ["lookup_cve", "Bir CVE-nin ctiaze əhatəsində görünüb-görünmədiyini yoxla"],
+  ["get_az_claims", "Azərbaycanı hədəf alan hacktivist / ransomware iddiaları (son N gün)"],
+  ["get_cve_actors", "CVE-ni istismar etdiyi bildirilən aktorlar, sitat və mənbə ilə"],
+  ["get_actor_cves", "Aktorun (id, ad və ya alias) istismar etdiyi CVE-lər"],
 ];
 
 const FEEDS = [

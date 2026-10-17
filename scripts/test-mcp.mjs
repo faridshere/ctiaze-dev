@@ -25,6 +25,9 @@ await call("get_recent_threats", { limit: 2 });
 await call("get_recent_kev", { limit: 2 });
 await call("search_threats", { query: "ransomware", limit: 2 });
 await call("lookup_cve", { cve_id: "CVE-2024-3400" });
+await call("get_az_claims", { days: 7 });
+await call("get_cve_actors", { cve: "CVE-2024-3400" });
+await call("get_actor_cves", { actor: "APT28" });
 
 await client.close();
 console.log("\nOK — all tools responded.");
