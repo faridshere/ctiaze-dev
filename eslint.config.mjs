@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone packages with their own tooling (see cli/README.md).
+    "cli/**",
+    "action/**",
   ]),
 ]);
 
