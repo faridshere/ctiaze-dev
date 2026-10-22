@@ -12,7 +12,7 @@ Node 24. The only network call is to the skopnix API.
 > **Status:** the action calls `POST https://skopnix.com/api/v1/stack`, which
 > may not be live yet. Until it is, the step fails with "the stack endpoint may
 > not be deployed yet". Until publication as `skopnix/stack-check`, use it from
-> this repository as `faridshere/ctiaze-dev/action@<commit-sha>`.
+> this repository as `pasashere/skopnix-dev/action@<commit-sha>`.
 
 ## Example: generate an SBOM with Syft and check it
 
@@ -44,7 +44,7 @@ jobs:
 
       - name: Check against skopnix
         id: skopnix
-        uses: skopnix/stack-check@v1 # or faridshere/ctiaze-dev/action@<sha> for now
+        uses: skopnix/stack-check@v1 # or pasashere/skopnix-dev/action@<sha> for now
         with:
           sbom: sbom.cdx.json
           fail-on: kev,epss>=0.5
