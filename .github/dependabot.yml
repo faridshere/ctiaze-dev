@@ -21,6 +21,8 @@ updates:
       # @types/node tracks the runtime major (Node 22), not the newest Node.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "npm"
     directory: "/cli"
     schedule:
@@ -35,6 +37,13 @@ updates:
         patterns: ["*"]
       cli-minor-patch:
         update-types: ["minor", "patch"]
+    ignore:
+      # Same holds as the portal and the web repo: TypeScript 7 is the native-compiler
+      # rewrite, and @types/node tracks the runtime major (Node 22), not the newest Node.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
