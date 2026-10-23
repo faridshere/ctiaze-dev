@@ -1,0 +1,28 @@
+# Daily dependency vulnerability audit (and on every push to main). Goes red on a
+# high or critical advisory, so a new CVE in something we already ship shows up even
+# when no dependency file changed. Read-only; needs no secrets.
+name: security-audit
+
+on:
+  schedule:
+    - cron: "17 2 * * *"   # 06:17 Asia/Baku
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: portal
+        run: npm audit --audit-level=high
+      - name: cli
+        working-directory: cli
+        run: npm audit --audit-level=high

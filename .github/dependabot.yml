@@ -1,0 +1,45 @@
+# Weekly grouped version updates for the portal (root), the CLI and the workflow actions.
+# Security fixes are not on this schedule: Dependabot security updates (repo setting) open
+# them as soon as an advisory lands, grouped into one PR per directory.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Baku"
+    open-pull-requests-limit: 5
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+      npm-minor-patch:
+        update-types: ["minor", "patch"]
+    ignore:
+      # @types/node tracks the runtime major (Node 22), not the newest Node.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: "npm"
+    directory: "/cli"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Baku"
+    open-pull-requests-limit: 3
+    groups:
+      cli-security:
+        applies-to: security-updates
+        patterns: ["*"]
+      cli-minor-patch:
+        update-types: ["minor", "patch"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Baku"
+    open-pull-requests-limit: 5
