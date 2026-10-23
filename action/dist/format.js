@@ -58,7 +58,11 @@ function failLines(report) {
     const parts = [...byRule].map(([rule, n]) => `${n} × ${rule}`);
     return [`fail-on ${report.failOn.join(",")}: FAILED (${parts.join(", ")}).`];
 }
-const mdCell = (s) => s.replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+// A markdown table cell. Backslashes are escaped FIRST: escaping only the pipe turns a
+// backslash-pipe in the input into backslash-backslash-pipe, which un-escapes the pipe and
+// lets SBOM text (component and actor names: untrusted input) break out of its cell
+// (CodeQL js/incomplete-sanitization).
+export const mdCell = (s) => s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
 const MD_ROW_LIMIT = 300;
 /** GitHub-flavoured markdown, sized for $GITHUB_STEP_SUMMARY (1 MiB cap). */
 export function markdownReport(report) {
