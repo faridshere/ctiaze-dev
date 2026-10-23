@@ -20,7 +20,7 @@ jobs:
       run:
         working-directory: cli
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
@@ -35,7 +35,7 @@ jobs:
     # Runs the Action itself against a local mock of /stack (no network to skopnix.com).
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: start mock /stack
         run: |
           nohup node cli/scripts/mock-stack-server.mjs 4555 > "$RUNNER_TEMP/mock.log" 2>&1 &
