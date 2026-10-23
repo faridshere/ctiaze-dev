@@ -11,23 +11,28 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.26.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
     "mcp-handler": "^1.1.0",
     "mongodb": "^7.5.0",
-    "next": "16.2.12",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22.20.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "16.3.8",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^3.2.7"
+    "vitest": "^5.0.5"
+  },
+  "overrides": {
+    "mcp-handler": {
+      "@modelcontextprotocol/sdk": "$@modelcontextprotocol/sdk"
+    }
   }
 }
